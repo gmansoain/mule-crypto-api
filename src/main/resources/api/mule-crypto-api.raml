@@ -1,0 +1,28 @@
+#%RAML 1.0
+title: Mule Crypto API
+mediaType:
+  - application/json
+version: 1.0.0
+protocols:
+  - HTTP
+/exchangerate:
+  get:
+    responses:
+      "200":
+        body:
+          application/json:
+            example:
+              strict: true
+              value:
+                time: 2022-06-25T09:46:13.0000000Z
+                coin_base: BTC
+                coin_quote: GBP
+                rate: 17462.421417836595
+            type: object
+  uriParameters:
+    coin_base:
+      example: BTC
+      type: string
+    coin_quote:
+      example: GBP
+      type: string
