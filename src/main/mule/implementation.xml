@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="fc55df26-cbf0-4d55-b7f0-15f9bfb5d1f6" >
+		<http:request-connection host="${coinapi.host}" protocol="HTTPS"/>
+	</http:request-config>
+	<flow name="implementationFlow" doc:id="114cf6f6-b5e9-4ccd-bb25-9298790e989e" >
+		<http:listener doc:name="Listener" doc:id="e55ac9ff-6639-4239-84b7-3940fb5552c1" config-ref="HTTP_Listener_config" path="/exchangerate/{coinbase}/{coinquote}"/>
+		<http:request method="GET" doc:name="Request" doc:id="69df0452-e997-4363-8afc-8a8e904396ab" config-ref="HTTP_Request_configuration" path="/{coinbase}/{coinquote}">
+			<http:headers ><![CDATA[#[output application/java
+---
+{
+	"X-CoinAPI-Key": "D0DDDF4D-9D5D-4BCA-BD9A-6420F23FDC38"
+
+}]]]></http:headers>
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	coinbase : attributes.uriParams.coinbase,
+	coinquote : attributes.uriParams.coinquote
+}]]]></http:uri-params>
+		</http:request>
+	</flow>
+</mule>

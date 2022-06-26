@@ -1,4 +1,2 @@
-sfdc:
-  username : "![0CXQwZBMmw43vtBN7jyoRQ==]"
-  password : "![0CXQwZBMmw43vtBN7jyoRQ==]"
-  securityToken : "![L2Ow6bBvBDEGmQYrutHfIcsBg]"
+coinapi:
+  apikey: "![xWuJJyR6B03CI+o/JoGsGRKIyiGUORUyYtqx0fuVexB5AyA0xxMQJg==]"
